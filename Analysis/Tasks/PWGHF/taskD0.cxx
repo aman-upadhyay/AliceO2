@@ -1,9 +1,8 @@
-// Copyright 2019-2020 CERN and copyright holders of ALICE O2.
-// See https://alice-o2.web.cern.ch/copyright for details of the copyright holders.
-// All rights not expressly granted are reserved.
+// Copyright CERN and copyright holders of ALICE O2. This software is
+// distributed under the terms of the GNU General Public License v3 (GPL
+// Version 3), copied verbatim in the file "COPYING".
 //
-// This software is distributed under the terms of the GNU General Public
-// License v3 (GPL Version 3), copied verbatim in the file "COPYING".
+// See http://alice-o2.web.cern.ch/license for full licensing information.
 //
 // In applying this license CERN does not waive the privileges and immunities
 // granted to it by virtue of its status as an Intergovernmental Organization
@@ -128,6 +127,23 @@ struct TaskD0MC {
   Configurable<int> d_selectionFlagD0{"d_selectionFlagD0", 1, "Selection Flag for D0"};
   Configurable<int> d_selectionFlagD0bar{"d_selectionFlagD0bar", 1, "Selection Flag for D0bar"};
   Configurable<double> cutYCandMax{"cutYCandMax", -1., "max. cand. rapidity"};
+  Configurable<std::vector<double>> bins{"pTBins", std::vector<double>{hf_cuts_d0_topik::pTBins_v}, "pT bin limits"};
+
+
+  void init(o2::framework::InitContext&)
+  {
+    auto vbins = (std::vector<double>)bins;
+    registry.add("hCPA2Dsig","2-prong candidates (matched);cosine of pointing angle;entries",{HistType::kTH2F,{{110, -1.1, 1.1},{vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hCPA2Dbg","2-prong candidates (unmatched);cosine of pointing angle;entries",{HistType::kTH2F,{{110, -1.1, 1.1},{vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hd0d02Dsig", "2-prong candidates (matched);product of DCAxy to prim. vertex (cm^{2});entries", {HistType::kTH2F, {{500, -1., 1.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hd0d02Dbg", "2-prong candidates (unmatched);product of DCAxy to prim. vertex (cm^{2});entries", {HistType::kTH2F, {{500, -1., 1.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hCPAXY2Dsig","2-prong candidates (matched);cosine of pointing angle XY;entries",{HistType::kTH2F,{{110, -1.1, 1.1},{vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hCPAXY2Dbg","2-prong candidates (unmatched);cosine of pointing angle XY;entries",{HistType::kTH2F,{{110, -1.1, 1.1},{vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hdeclengthXY2DNormsig", "2-prong candidates (matched);decay length xy normalized (cm);entries", {HistType::kTH2F, {{200, 0., 2.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hdeclengthXY2DNormbg", "2-prong candidates (unmatched);decay length xy normalized (cm);entries", {HistType::kTH2F, {{200, 0., 2.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hdeclength2Dsig", "2-prong candidates (matched) ;decay length xy (cm);entries", {HistType::kTH2F, {{200, 0., 2.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hdeclength2Dbg", "2-prong candidates (unmatched) ;decay length xy (cm);entries", {HistType::kTH2F, {{200, 0., 2.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+  }
 
   Filter filterSelectCandidates = (aod::hf_selcandidate_d0::isSelD0 >= d_selectionFlagD0 || aod::hf_selcandidate_d0::isSelD0bar >= d_selectionFlagD0bar);
 
@@ -157,10 +173,20 @@ struct TaskD0MC {
         }
         registry.fill(HIST("hCPARecSig"), candidate.cpa());
         registry.fill(HIST("hEtaRecSig"), candidate.eta());
+        registry.fill(HIST("hCPA2Dsig"), candidate.cpa(), candidate.pt());
+        registry.fill(HIST("hd0d02Dsig"), candidate.impactParameterProduct(), candidate.pt());
+        registry.fill(HIST("hCPAXY2Dsig"), candidate.cpaXY(), candidate.pt());
+        registry.fill(HIST("hdeclengthXY2DNormsig"), candidate.decayLengthXYNormalised(), candidate.pt());
+        registry.fill(HIST("hdeclength2Dsig"), candidate.decayLength(), candidate.pt());
       } else {
         registry.fill(HIST("hPtRecBg"), candidate.pt());
         registry.fill(HIST("hCPARecBg"), candidate.cpa());
         registry.fill(HIST("hEtaRecBg"), candidate.eta());
+        registry.fill(HIST("hCPA2Dbg"), candidate.cpa(), candidate.pt());
+        registry.fill(HIST("hd0d02Dbg"), candidate.impactParameterProduct(), candidate.pt());
+        registry.fill(HIST("hCPAXY2Dbg"), candidate.cpaXY(), candidate.pt());
+        registry.fill(HIST("hdeclengthXY2DNormbg"), candidate.decayLengthXYNormalised(), candidate.pt());
+        registry.fill(HIST("hdeclength2Dbg"), candidate.decayLength(), candidate.pt());
       }
     }
     // MC gen.
@@ -193,3 +219,4 @@ WorkflowSpec defineDataProcessing(ConfigContext const& cfgc)
   }
   return workflow;
 }
+
