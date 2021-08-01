@@ -133,16 +133,29 @@ struct TaskD0MC {
   void init(o2::framework::InitContext&)
   {
     auto vbins = (std::vector<double>)bins;
-    registry.add("hCPA2Dsig","2-prong candidates (matched);cosine of pointing angle;entries",{HistType::kTH2F,{{110, -1.1, 1.1},{vbins, "#it{p}_{T} (GeV/#it{c})"}}});
-    registry.add("hCPA2Dbg","2-prong candidates (unmatched);cosine of pointing angle;entries",{HistType::kTH2F,{{110, -1.1, 1.1},{vbins, "#it{p}_{T} (GeV/#it{c})"}}});
-    registry.add("hd0d02Dsig", "2-prong candidates (matched);product of DCAxy to prim. vertex (cm^{2});entries", {HistType::kTH2F, {{500, -1., 1.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
-    registry.add("hd0d02Dbg", "2-prong candidates (unmatched);product of DCAxy to prim. vertex (cm^{2});entries", {HistType::kTH2F, {{500, -1., 1.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
-    registry.add("hCPAXY2Dsig","2-prong candidates (matched);cosine of pointing angle XY;entries",{HistType::kTH2F,{{110, -1.1, 1.1},{vbins, "#it{p}_{T} (GeV/#it{c})"}}});
-    registry.add("hCPAXY2Dbg","2-prong candidates (unmatched);cosine of pointing angle XY;entries",{HistType::kTH2F,{{110, -1.1, 1.1},{vbins, "#it{p}_{T} (GeV/#it{c})"}}});
-    registry.add("hdeclengthXY2DNormsig", "2-prong candidates (matched);decay length xy normalized (cm);entries", {HistType::kTH2F, {{200, 0., 2.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
-    registry.add("hdeclengthXY2DNormbg", "2-prong candidates (unmatched);decay length xy normalized (cm);entries", {HistType::kTH2F, {{200, 0., 2.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
-    registry.add("hdeclength2Dsig", "2-prong candidates (matched) ;decay length xy (cm);entries", {HistType::kTH2F, {{200, 0., 2.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
-    registry.add("hdeclength2Dbg", "2-prong candidates (unmatched) ;decay length xy (cm);entries", {HistType::kTH2F, {{200, 0., 2.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hCPA2DRecSig","2-prong candidates (matched);cosine of pointing angle;entries",{HistType::kTH2F,{{110, -1.1, 1.1},{vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hCPA2DRecBg","2-prong candidates (unmatched);cosine of pointing angle;entries",{HistType::kTH2F,{{110, -1.1, 1.1},{vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hIPPRecSig", "2-prong candidates (matched);product of DCAxy to prim. vertex (cm^{2});entries", {HistType::kTH2F, {{500, -1., 1.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hIPPRecBg", "2-prong candidates (unmatched);product of DCAxy to prim. vertex (cm^{2});entries", {HistType::kTH2F, {{500, -1., 1.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hCPAXYRecSig","2-prong candidates (matched);cosine of pointing angle XY;entries",{HistType::kTH2F,{{110, -1.1, 1.1},{vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hCPAXYRecBg","2-prong candidates (unmatched);cosine of pointing angle XY;entries",{HistType::kTH2F,{{110, -1.1, 1.1},{vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hDeclengthXYRecSig", "2-prong candidates (matched);decay length xy normalized (cm);entries", {HistType::kTH2F, {{200, 0., 2.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hDeclengthXYRecBg", "2-prong candidates (unmatched);decay length xy normalized (cm);entries", {HistType::kTH2F, {{200, 0., 2.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hDeclengthRecSig", "2-prong candidates (matched) ;decay length xy (cm);entries", {HistType::kTH2F, {{200, 0., 2.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hDeclengthRecBg", "2-prong candidates (unmatched) ;decay length xy (cm);entries", {HistType::kTH2F, {{200, 0., 2.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hCTSRecSig", "2-prong candidates (matched) ;cos #it{#theta}* (D^{0});entries", {HistType::kTH2F, {{110, -1.1, 1.1}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hCTSRecBg", "2-prong candidates (unmatched) ;cos #it{#theta}* (D^{0});entries", {HistType::kTH2F, {{110, -1.1, 1.1}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hpionpTRecSig", "2-prong candidates (matched) ;Pion Track pT (GeV/#it{c});entries", {HistType::kTH2F, {{200, -100., 100.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});  //not sure about bin limits
+    registry.add("hpionpTRecBg", "2-prong candidates (unmatched) ;Pion Track pT (GeV/#it{c});entries", {HistType::kTH2F, {{200, -100., 100.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hkaonpTRecSig", "2-prong candidates (matched) ;kaon Track pT (GeV/#it{c});entries", {HistType::kTH2F, {{200, -100., 100.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hkaonpTRecBg", "2-prong candidates (unmatched) ;kaon Track pT (GeV/#it{c});entries", {HistType::kTH2F, {{200, -100., 100.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hDCAkaonRecSig", "2-prong candidates (matched);kaon DCAxy to sec. vertex (cm);entries", {HistType::kTH2F, {{100, -1., 1.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hDCAkaonRecBg", "2-prong candidates (unmatched);kaon DCAxy to sec. vertex (cm);entries", {HistType::kTH2F, {{100, -1., 1.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hDCApionRecSig", "2-prong candidates (matched);pion DCAxy to sec. vertex (cm);entries", {HistType::kTH2F, {{100, -1., 1.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hDCApionRecBg", "2-prong candidates (unmatched);pion DCAxy to sec. vertex (cm);entries", {HistType::kTH2F, {{100, -1., 1.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hmass2DRecSig", "2-prong candidates (matched) ;inv. mass (#pi K) (GeV/#it{c}^{2});entries", {HistType::kTH2F, {{500, 0., 5.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hmass2DRecBg", "2-prong candidates (unmatched) ;inv. mass (#pi K) (GeV/#it{c}^{2});entries", {HistType::kTH2F, {{500, 0., 5.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    //candidate.impactparameter normalized left
   }
 
   Filter filterSelectCandidates = (aod::hf_selcandidate_d0::isSelD0 >= d_selectionFlagD0 || aod::hf_selcandidate_d0::isSelD0bar >= d_selectionFlagD0bar);
@@ -150,9 +163,14 @@ struct TaskD0MC {
   void process(soa::Filtered<soa::Join<aod::HfCandProng2, aod::HFSelD0Candidate, aod::HfCandProng2MCRec>> const& candidates,
                soa::Join<aod::McParticles, aod::HfCandProng2MCGen> const& particlesMC, aod::BigTracksMC const& tracks)
   {
+
     // MC rec.
     //Printf("MC Candidates: %d", candidates.size());
     for (auto& candidate : candidates) {
+      auto trackPos = candidate.index0_as<aod::BigTracksPID>(); // positive daughter
+      auto trackNeg = candidate.index1_as<aod::BigTracksPID>(); // negative daughter
+      auto trackPion = trackPos;
+      auto trackKaon = trackNeg;
       if (!(candidate.hfflag() & 1 << DecayType::D0ToPiK)) {
         continue;
       }
@@ -173,20 +191,52 @@ struct TaskD0MC {
         }
         registry.fill(HIST("hCPARecSig"), candidate.cpa());
         registry.fill(HIST("hEtaRecSig"), candidate.eta());
-        registry.fill(HIST("hCPA2Dsig"), candidate.cpa(), candidate.pt());
-        registry.fill(HIST("hd0d02Dsig"), candidate.impactParameterProduct(), candidate.pt());
-        registry.fill(HIST("hCPAXY2Dsig"), candidate.cpaXY(), candidate.pt());
-        registry.fill(HIST("hdeclengthXY2DNormsig"), candidate.decayLengthXYNormalised(), candidate.pt());
-        registry.fill(HIST("hdeclength2Dsig"), candidate.decayLength(), candidate.pt());
+        registry.fill(HIST("hCPA2DRecSig"), candidate.cpa(), candidate.pt());
+        registry.fill(HIST("hIPPRecSig"), candidate.impactParameterProduct(), candidate.pt());
+        registry.fill(HIST("hCPAXYRecSig"), candidate.cpaXY(), candidate.pt());
+        registry.fill(HIST("hDeclengthXYRecSig"), candidate.decayLengthXYNormalised(), candidate.pt());
+        registry.fill(HIST("hDeclengthRecSig"), candidate.decayLength(), candidate.pt());
+        registry.fill(HIST("hCTSRecSig"), CosThetaStarD0(candidate), candidate.pt());
+        if (candidate.isSelD0() >= d_selectionFlagD0) {
+          registry.fill(HIST("hmass2DRecSig"), InvMassD0(candidate), candidate.pt());
+          registry.fill(HIST("hpionpTRecSig"),trackPion.pt(),candidate.pt());
+          registry.fill(HIST("hkaonpTRecSig"),trackKaon.pt(),candidate.pt());
+          registry.fill(HIST("hDCApionRecSig"),trackPion.dcaPrim0(),candidate.pt());
+          registry.fill(HIST("hDCAkaonRecSig"),trackKaon.dcaPrim0(),candidate.pt());
+        }
+        if (candidate.isSelD0bar() >= d_selectionFlagD0bar) {
+          registry.fill(HIST("hmass2DRecSig"), InvMassD0bar(candidate), candidate.pt());
+          registry.fill(HIST("hpionpTRecSig"),trackKaon.pt(),candidate.pt());
+          registry.fill(HIST("hkaonpTRecSig"),trackPion.pt(),candidate.pt());
+          registry.fill(HIST("hDCApionRecSig"),trackKaon.dcaPrim0(),candidate.pt());
+          registry.fill(HIST("hDCAkaonRecSig"),trackPion.dcaPrim0(),candidate.pt());
+        }
+
       } else {
         registry.fill(HIST("hPtRecBg"), candidate.pt());
         registry.fill(HIST("hCPARecBg"), candidate.cpa());
         registry.fill(HIST("hEtaRecBg"), candidate.eta());
-        registry.fill(HIST("hCPA2Dbg"), candidate.cpa(), candidate.pt());
-        registry.fill(HIST("hd0d02Dbg"), candidate.impactParameterProduct(), candidate.pt());
-        registry.fill(HIST("hCPAXY2Dbg"), candidate.cpaXY(), candidate.pt());
-        registry.fill(HIST("hdeclengthXY2DNormbg"), candidate.decayLengthXYNormalised(), candidate.pt());
-        registry.fill(HIST("hdeclength2Dbg"), candidate.decayLength(), candidate.pt());
+        registry.fill(HIST("hCPA2DRecBg"), candidate.cpa(), candidate.pt());
+        registry.fill(HIST("hIPPRecBg"), candidate.impactParameterProduct(), candidate.pt());
+        registry.fill(HIST("hCPAXYRecBg"), candidate.cpaXY(), candidate.pt());
+        registry.fill(HIST("hDeclengthXYRecBg"), candidate.decayLengthXYNormalised(), candidate.pt());
+        registry.fill(HIST("hDeclengthRecBg"), candidate.decayLength(), candidate.pt());
+        registry.fill(HIST("hCTSRecBg"), CosThetaStarD0(candidate), candidate.pt());
+        if (candidate.isSelD0() >= d_selectionFlagD0) {
+          registry.fill(HIST("hmass2DRecBg"), InvMassD0(candidate), candidate.pt());
+          registry.fill(HIST("hpionpTRecBg"),trackPion.pt(),candidate.pt());
+          registry.fill(HIST("hkaonpTRecBg"),trackKaon.pt(),candidate.pt());
+          registry.fill(HIST("hDCApionRecBg"),trackPion.dcaPrim0(),candidate.pt());
+          registry.fill(HIST("hDCAkaonRecBg"),trackKaon.dcaPrim0(),candidate.pt());
+        }
+        if (candidate.isSelD0bar() >= d_selectionFlagD0bar) {
+          registry.fill(HIST("hmass2DRecBg"), InvMassD0bar(candidate), candidate.pt());
+          registry.fill(HIST("hpionpTRecBg"),trackKaon.pt(),candidate.pt());
+          registry.fill(HIST("hkaonpTRecBg"),trackPion.pt(),candidate.pt());
+          registry.fill(HIST("hDCApionRecBg"),trackKaon.dcaPrim0(),candidate.pt());
+          registry.fill(HIST("hDCAkaonRecBg"),trackPion.dcaPrim0(),candidate.pt());
+        }
+
       }
     }
     // MC gen.
@@ -219,4 +269,3 @@ WorkflowSpec defineDataProcessing(ConfigContext const& cfgc)
   }
   return workflow;
 }
-
