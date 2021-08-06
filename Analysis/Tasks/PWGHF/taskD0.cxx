@@ -167,10 +167,6 @@ struct TaskD0MC {
     // MC rec.
     //Printf("MC Candidates: %d", candidates.size());
     for (auto& candidate : candidates) {
-      auto trackPos = candidate.index0_as<aod::BigTracksPID>(); // positive daughter
-      auto trackNeg = candidate.index1_as<aod::BigTracksPID>(); // negative daughter
-      auto trackPion = trackPos;
-      auto trackKaon = trackNeg;
       if (!(candidate.hfflag() & 1 << DecayType::D0ToPiK)) {
         continue;
       }
@@ -199,17 +195,17 @@ struct TaskD0MC {
         registry.fill(HIST("hCTSRecSig"), CosThetaStarD0(candidate), candidate.pt());
         if (candidate.isSelD0() >= d_selectionFlagD0) {
           registry.fill(HIST("hmass2DRecSig"), InvMassD0(candidate), candidate.pt());
-          registry.fill(HIST("hpionpTRecSig"),trackPion.pt(),candidate.pt());
-          registry.fill(HIST("hkaonpTRecSig"),trackKaon.pt(),candidate.pt());
-          registry.fill(HIST("hDCApionRecSig"),trackPion.dcaPrim0(),candidate.pt());
-          registry.fill(HIST("hDCAkaonRecSig"),trackKaon.dcaPrim0(),candidate.pt());
+          registry.fill(HIST("hpionpTRecSig"),candidate.ptProng0(),candidate.pt());
+          registry.fill(HIST("hkaonpTRecSig"),candidate.ptProng1(),candidate.pt());
+          registry.fill(HIST("hDCApionRecSig"),candidate.impactParameter0(),candidate.pt());
+          registry.fill(HIST("hDCAkaonRecSig"),candidate.impactParameter1(),candidate.pt());
         }
         if (candidate.isSelD0bar() >= d_selectionFlagD0bar) {
           registry.fill(HIST("hmass2DRecSig"), InvMassD0bar(candidate), candidate.pt());
-          registry.fill(HIST("hpionpTRecSig"),trackKaon.pt(),candidate.pt());
-          registry.fill(HIST("hkaonpTRecSig"),trackPion.pt(),candidate.pt());
-          registry.fill(HIST("hDCApionRecSig"),trackKaon.dcaPrim0(),candidate.pt());
-          registry.fill(HIST("hDCAkaonRecSig"),trackPion.dcaPrim0(),candidate.pt());
+          registry.fill(HIST("hpionpTRecSig"),candidate.ptProng1(),candidate.pt());
+          registry.fill(HIST("hkaonpTRecSig"),candidate.ptProng0(),candidate.pt());
+          registry.fill(HIST("hDCApionRecSig"),candidate.impactParameter1(),candidate.pt());
+          registry.fill(HIST("hDCAkaonRecSig"),candidate.impactParameter0(),candidate.pt());
         }
 
       } else {
@@ -224,17 +220,17 @@ struct TaskD0MC {
         registry.fill(HIST("hCTSRecBg"), CosThetaStarD0(candidate), candidate.pt());
         if (candidate.isSelD0() >= d_selectionFlagD0) {
           registry.fill(HIST("hmass2DRecBg"), InvMassD0(candidate), candidate.pt());
-          registry.fill(HIST("hpionpTRecBg"),trackPion.pt(),candidate.pt());
-          registry.fill(HIST("hkaonpTRecBg"),trackKaon.pt(),candidate.pt());
-          registry.fill(HIST("hDCApionRecBg"),trackPion.dcaPrim0(),candidate.pt());
-          registry.fill(HIST("hDCAkaonRecBg"),trackKaon.dcaPrim0(),candidate.pt());
+          registry.fill(HIST("hpionpTRecBg"),candidate.ptProng0(),candidate.pt());
+          registry.fill(HIST("hkaonpTRecBg"),candidate.ptProng1(),candidate.pt());
+          registry.fill(HIST("hDCApionRecBg"),candidate.impactParameter0(),candidate.pt());
+          registry.fill(HIST("hDCAkaonRecBg"),candidate.impactParameter1(),candidate.pt());
         }
         if (candidate.isSelD0bar() >= d_selectionFlagD0bar) {
           registry.fill(HIST("hmass2DRecBg"), InvMassD0bar(candidate), candidate.pt());
-          registry.fill(HIST("hpionpTRecBg"),trackKaon.pt(),candidate.pt());
-          registry.fill(HIST("hkaonpTRecBg"),trackPion.pt(),candidate.pt());
-          registry.fill(HIST("hDCApionRecBg"),trackKaon.dcaPrim0(),candidate.pt());
-          registry.fill(HIST("hDCAkaonRecBg"),trackPion.dcaPrim0(),candidate.pt());
+          registry.fill(HIST("hpionpTRecBg"),candidate.ptProng1(),candidate.pt());
+          registry.fill(HIST("hkaonpTRecBg"),candidate.ptProng0(),candidate.pt());
+          registry.fill(HIST("hDCApionRecBg"),candidate.impactParameter1(),candidate.pt());
+          registry.fill(HIST("hDCAkaonRecBg"),candidate.impactParameter0(),candidate.pt());
         }
 
       }
