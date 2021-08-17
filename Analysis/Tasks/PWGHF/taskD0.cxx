@@ -135,8 +135,8 @@ struct TaskD0MC {
     auto vbins = (std::vector<double>)bins;
     registry.add("hCPA2DRecSig","2-prong candidates (matched);cosine of pointing angle;entries",{HistType::kTH2F,{{110, -1.1, 1.1},{vbins, "#it{p}_{T} (GeV/#it{c})"}}});
     registry.add("hCPA2DRecBg","2-prong candidates (unmatched);cosine of pointing angle;entries",{HistType::kTH2F,{{110, -1.1, 1.1},{vbins, "#it{p}_{T} (GeV/#it{c})"}}});
-    registry.add("hIPPRecSig", "2-prong candidates (matched);product of DCAxy to prim. vertex (cm^{2});entries", {HistType::kTH2F, {{500, -1., 1.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
-    registry.add("hIPPRecBg", "2-prong candidates (unmatched);product of DCAxy to prim. vertex (cm^{2});entries", {HistType::kTH2F, {{500, -1., 1.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hIPPRecSig", "2-prong candidates (matched);product of DCAxy to prim. vertex (cm^{2});entries", {HistType::kTH2F, {{2000, -0.04, 0.04}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
+    registry.add("hIPPRecBg", "2-prong candidates (unmatched);product of DCAxy to prim. vertex (cm^{2});entries", {HistType::kTH2F, {{2000, -0.04, 0.04}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
     registry.add("hCPAXYRecSig","2-prong candidates (matched);cosine of pointing angle XY;entries",{HistType::kTH2F,{{110, -1.1, 1.1},{vbins, "#it{p}_{T} (GeV/#it{c})"}}});
     registry.add("hCPAXYRecBg","2-prong candidates (unmatched);cosine of pointing angle XY;entries",{HistType::kTH2F,{{110, -1.1, 1.1},{vbins, "#it{p}_{T} (GeV/#it{c})"}}});
     registry.add("hDeclengthXYRecSig", "2-prong candidates (matched);decay length xy normalized (cm);entries", {HistType::kTH2F, {{200, 0., 2.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
@@ -145,7 +145,7 @@ struct TaskD0MC {
     registry.add("hDeclengthRecBg", "2-prong candidates (unmatched) ;decay length xy (cm);entries", {HistType::kTH2F, {{200, 0., 2.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
     registry.add("hCTSRecSig", "2-prong candidates (matched) ;cos #it{#theta}* (D^{0});entries", {HistType::kTH2F, {{110, -1.1, 1.1}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
     registry.add("hCTSRecBg", "2-prong candidates (unmatched) ;cos #it{#theta}* (D^{0});entries", {HistType::kTH2F, {{110, -1.1, 1.1}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
-    registry.add("hpionpTRecSig", "2-prong candidates (matched) ;Pion Track pT (GeV/#it{c});entries", {HistType::kTH2F, {{200, -100., 100.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});  //not sure about bin limits
+    registry.add("hpionpTRecSig", "2-prong candidates (matched) ;Pion Track pT (GeV/#it{c});entries", {HistType::kTH2F, {{200, -100., 100.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
     registry.add("hpionpTRecBg", "2-prong candidates (unmatched) ;Pion Track pT (GeV/#it{c});entries", {HistType::kTH2F, {{200, -100., 100.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
     registry.add("hkaonpTRecSig", "2-prong candidates (matched) ;kaon Track pT (GeV/#it{c});entries", {HistType::kTH2F, {{200, -100., 100.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
     registry.add("hkaonpTRecBg", "2-prong candidates (unmatched) ;kaon Track pT (GeV/#it{c});entries", {HistType::kTH2F, {{200, -100., 100.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
@@ -155,7 +155,6 @@ struct TaskD0MC {
     registry.add("hDCApionRecBg", "2-prong candidates (unmatched);pion DCAxy to sec. vertex (cm);entries", {HistType::kTH2F, {{100, -1., 1.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
     registry.add("hmass2DRecSig", "2-prong candidates (matched) ;inv. mass (#pi K) (GeV/#it{c}^{2});entries", {HistType::kTH2F, {{500, 0., 5.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
     registry.add("hmass2DRecBg", "2-prong candidates (unmatched) ;inv. mass (#pi K) (GeV/#it{c}^{2});entries", {HistType::kTH2F, {{500, 0., 5.}, {vbins, "#it{p}_{T} (GeV/#it{c})"}}});
-    //candidate.impactparameter normalized left
   }
 
   Filter filterSelectCandidates = (aod::hf_selcandidate_d0::isSelD0 >= d_selectionFlagD0 || aod::hf_selcandidate_d0::isSelD0bar >= d_selectionFlagD0bar);
